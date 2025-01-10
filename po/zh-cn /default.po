@@ -1,5 +1,0 @@
-msgid "NFtables Firewall"
-msgstr "NFtables 防火墙"
-
-msgid "IPtables Firewall"
-msgstr "IPtables 防火墙"
