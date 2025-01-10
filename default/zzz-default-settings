@@ -4,7 +4,7 @@
 . /lib/functions/uci-defaults.sh
 
 # 设置默认主题为kucat
-uci set luci.main.mediaurlbase='/luci-static/kucat'
+uci set luci.main.mediaurlbase='/luci-static/argon'
 uci commit luci
 
 # 设置LAN口DNS
