@@ -7,6 +7,9 @@
 uci set luci.main.mediaurlbase='/luci-static/argon'
 uci commit luci
 
+# opkg mirror
+sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
+
 # 设置LAN口DNS
 uci set network.lan.dns='127.0.0.1'
 uci commit network
