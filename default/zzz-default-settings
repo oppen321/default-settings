@@ -3,8 +3,8 @@
 . /etc/os-release
 . /lib/functions/uci-defaults.sh
 
-# 设置默认主题为argon
-uci set luci.main.mediaurlbase='/luci-static/argon'
+# 设置默认主题为kucat
+uci set luci.main.mediaurlbase='/luci-static/kucat'
 uci commit luci
 
 # 切换opkg源
