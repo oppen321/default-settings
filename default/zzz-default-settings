@@ -261,7 +261,6 @@ uci commit AdGuardHome
 /etc/init.d/AdGuardHome restart
 
 # 设置Adguardhome上游服务器
-chmod +x /etc/AdGuardHome.yaml
 # sed -i 's|- 223.5.5.5|- 127.0.0.1:6053|' /etc/AdGuardHome.yaml
 # sed -i '/upstream_dns:/a\    - 127.0.0.1:5335' /etc/AdGuardHome.yaml
 sed -i 's|upstream_dns_file: ""|upstream_dns_file: "/etc/AdGuardHome-dnslist.yaml"|' /etc/AdGuardHome.yaml
@@ -269,6 +268,8 @@ sed -i 's|upstream_dns_file: ""|upstream_dns_file: "/etc/AdGuardHome-dnslist.yam
 sed -i 's/upstream_mode: .*/upstream_mode: parallel/' /etc/AdGuardHome.yaml
 # 设置缓存
 sed -i 's/cache_size: .*/cache_size: 0/' /etc/AdGuardHome.yaml
+# 报错服务
+uci commit AdGuardHome
 # 重启服务
 /etc/init.d/AdGuardHome restart
 
@@ -301,7 +302,7 @@ uci set openclash.@dns_servers[-1].ip='127.0.0.1'
 uci set openclash.@dns_servers[-1].port='5553'
 uci set openclash.config.enable_custom_dns='1'
 # 模式设置
-uci set openclash.config.en_mode='fake-ip-tun'
+uci set openclash.config.en_mode='fake-ip-mix'
 # 自定义上游DNS服务器
 uci set openclash.config.enable_custom_dns='1'
 # Fake-IP持久化
