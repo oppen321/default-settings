@@ -19,6 +19,11 @@ uci set network.lan.dns='127.0.0.1'
 uci commit network
 /etc/init.d/network restart
 
+# 配置流量卸载
+uci set firewall.@defaults[0].flow_offloading=1
+uci commit firewall
+/etc/init.d/firewall restart
+
 # 禁用IPV6
 uci set dhcp.lan.ra='disabled'
 uci set dhcp.lan.dhcpv6='disabled'
