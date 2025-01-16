@@ -19,6 +19,13 @@ uci set network.lan.dns='127.0.0.1'
 uci commit network
 /etc/init.d/network restart
 
+# 禁用IPV6
+uci set dhcp.lan.ra='disabled'
+uci set dhcp.lan.dhcpv6='disabled'
+uci set dhcp.lan.ndp='disabled'
+uci set dhcp.@dnsmasq[0].filter_aaaa='1'
+uci commit dhcp
+
 # 默认wan口防火墙打开
 uci set firewall.@zone[1].input='ACCEPT'
 uci commit firewall
@@ -59,9 +66,9 @@ uci set smartdns.@smartdns[0].seconddns_no_speed_check='0'
 uci set smartdns.@smartdns[0].cache_size='190150'
 uci set smartdns.@smartdns[0].serve_expired='0'
 uci set smartdns.@smartdns[0].auto_set_dnsmasq='0'
-uci set smartdns.@smartdns[0].ipv6_server='1'
-uci set smartdns.@smartdns[0].dualstack_ip_selection='1'
-uci set smartdns.@smartdns[0].force_aaaa_soa='0'
+uci set smartdns.@smartdns[0].ipv6_server='0'
+uci set smartdns.@smartdns[0].dualstack_ip_selection='0'
+uci set smartdns.@smartdns[0].force_aaaa_soa='1'
 uci set smartdns.@smartdns[0].coredump='1'
 uci set smartdns.@smartdns[0].speed_check_mode='tcp:443,tcp:80,ping'
 uci set smartdns.@smartdns[0].resolve_local_hostnames='1'
@@ -70,7 +77,7 @@ uci set smartdns.@smartdns[0].enable_auto_update='0'
 uci set smartdns.@smartdns[0].enabled='1'
 uci set smartdns.@smartdns[0].bind_device='1'
 uci set smartdns.@smartdns[0].cache_persist='1'
-uci set smartdns.@smartdns[0].force_https_soa='0'
+uci set smartdns.@smartdns[0].force_https_soa='1'
 uci set smartdns.@smartdns[0].seconddns_no_dualstack_selection='0'
 uci set smartdns.@smartdns[0].seconddns_no_cache='0'
 uci add smartdns server
