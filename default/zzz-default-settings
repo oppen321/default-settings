@@ -29,7 +29,10 @@ uci set dhcp.lan.ra='disabled'
 uci set dhcp.lan.dhcpv6='disabled'
 uci set dhcp.lan.ndp='disabled'
 uci set dhcp.@dnsmasq[0].filter_aaaa='1'
+uci set dhcp.@dnsmasq[0].min_cache_ttl='0'
+uci set dhcp.@dnsmasq[0].max_cache_ttl='0'
 uci commit dhcp
+/etc/init.d/dnsmasq restart
 
 # 默认wan口防火墙打开
 uci set firewall.@zone[1].input='ACCEPT'
