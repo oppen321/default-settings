@@ -11,9 +11,6 @@ sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:
 uci set luci.main.mediaurlbase='/luci-static/kucat'
 uci commit luci
 
-# 开启每日一言
-uci set advancedplus.basic.dayword='1'
-
 # 切换opkg源
 sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
 
