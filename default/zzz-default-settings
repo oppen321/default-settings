@@ -14,11 +14,6 @@ uci commit luci
 # 切换opkg源
 sed -i 's,downloads.openwrt.org,mirrors.pku.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
 
-# 设置LAN口DNS
-uci set network.lan.dns='127.0.0.1'
-uci commit network
-/etc/init.d/network restart
-
 # 配置流量卸载
 uci set firewall.@defaults[0].flow_offloading=1
 uci commit firewall
