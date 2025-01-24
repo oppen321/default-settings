@@ -8,7 +8,7 @@ sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999
 sed -i 's/root:::0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
 
 # 设置默认主题为kucat
-uci set luci.main.mediaurlbase='/luci-static/kucat'
+uci set luci.main.mediaurlbase='/luci-static/argon'
 uci commit luci
 
 # 切换opkg源
@@ -56,38 +56,6 @@ uci add_list dockerd.globals.registry_mirrors="https://docker.m.daocloud.io"
 uci commit dockerd
 
 # Smartdns相关设置
-uci set smartdns.@smartdns[0].prefetch_domain='1'
-uci set smartdns.@smartdns[0].port='6053'
-uci set smartdns.@smartdns[0].seconddns_port='5335'
-uci set smartdns.@smartdns[0].seconddns_no_rule_addr='1'
-uci set smartdns.@smartdns[0].seconddns_no_rule_nameserver='0'
-uci set smartdns.@smartdns[0].seconddns_no_rule_ip='0'
-uci set smartdns.@smartdns[0].seconddns_no_rule_soa='0'
-uci set smartdns.@smartdns[0].tcp_server='1'
-uci set smartdns.@smartdns[0].rr_ttl='600'
-uci set smartdns.@smartdns[0].seconddns_enabled='1'
-uci set smartdns.@smartdns[0].server_name='smartdns-China'
-uci set smartdns.@smartdns[0].seconddns_tcp_server='1'
-uci set smartdns.@smartdns[0].seconddns_server_group='smartdns-Overseas'
-uci set smartdns.@smartdns[0].rr_ttl_min='5'
-uci set smartdns.@smartdns[0].seconddns_no_speed_check='1'
-uci set smartdns.@smartdns[0].cache_size='190150'
-uci set smartdns.@smartdns[0].serve_expired='1'
-uci set smartdns.@smartdns[0].auto_set_dnsmasq='0'
-uci set smartdns.@smartdns[0].ipv6_server='0'
-uci set smartdns.@smartdns[0].dualstack_ip_selection='0'
-uci set smartdns.@smartdns[0].force_aaaa_soa='1'
-uci set smartdns.@smartdns[0].coredump='1'
-uci set smartdns.@smartdns[0].speed_check_mode='tcp:443,tcp:80,ping'
-uci set smartdns.@smartdns[0].resolve_local_hostnames='1'
-uci set smartdns.@smartdns[0].seconddns_force_aaaa_soa='1'
-uci set smartdns.@smartdns[0].enable_auto_update='0'
-uci set smartdns.@smartdns[0].enabled='1'
-uci set smartdns.@smartdns[0].bind_device='1'
-uci set smartdns.@smartdns[0].cache_persist='1'
-uci set smartdns.@smartdns[0].force_https_soa='1'
-uci set smartdns.@smartdns[0].seconddns_no_dualstack_selection='1'
-uci set smartdns.@smartdns[0].seconddns_no_cache='1'
 uci add smartdns server
 uci set smartdns.@server[0].enabled='1'
 uci set smartdns.@server[0].type='udp'
