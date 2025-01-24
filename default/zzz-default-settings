@@ -263,57 +263,6 @@ uci commit smartdns
 # uci commit passwall
 # /etc/init.d/passwall restart
 
-### OpenClash设置
-# 禁用默认DNS配置
-n=0
-while [ "$n" -lt $(uci show openclash|grep -c "^openclash.@dns_servers\[[0-9]\{1,10\}\]=dns_servers") ]; do
-  uci set openclash.@dns_servers[$n].enabled='0'
-  n=$((n + 1))
-done
-# 设置DNS
-uci add openclash dns_servers
-uci set openclash.@dns_servers[-1].enabled='1'
-uci set openclash.@dns_servers[-1].group='nameserver'
-uci set openclash.@dns_servers[-1].type='udp'
-uci set openclash.@dns_servers[-1].ip='127.0.0.1'
-uci set openclash.@dns_servers[-1].port='5553'
-uci add openclash dns_servers
-uci set openclash.@dns_servers[-1].enabled='1'
-uci set openclash.@dns_servers[-1].group='fallback'
-uci set openclash.@dns_servers[-1].type='udp'
-uci set openclash.@dns_servers[-1].ip='127.0.0.1'
-uci set openclash.@dns_servers[-1].port='5553'
-uci set openclash.config.enable_custom_dns='1'
-# 模式设置
-uci set openclash.config.en_mode='fake-ip-mix'
-# 自定义上游DNS服务器
-uci set openclash.config.enable_custom_dns='1'
-# Fake-IP持久化
-uci set openclash.config.store_fakeip='1'
-# 启用Fake-IP 过滤器
-uci set openclash.config.custom_fakeip_filter='1'
-# 开启绕过服务器地址
-uci set openclash.config.bypass_gateway_compatible='1'
-# 禁用本地 DNS 劫持
-uci set openclash.config.enable_redirect_dns='0'
-# 开启 GeoIP MMDB 自动更新
-uci set openclash.config.geoip_auto_update='1'
-uci set openclash.config.geoip_update_week_time='*'  # 每周更新
-uci set openclash.config.geoip_update_day_time='3'  # 每周的第 3 天（可以根据需求修改）
-# 开启 GeoIP Dat 自动更新
-uci set openclash.config.geo_auto_update='1'
-uci set openclash.config.geo_update_week_time='*'  # 每周更新
-uci set openclash.config.geo_update_day_time='1'  # 每周的第 1 天（可以根据需求修改）
-# 开启 GeoSite 数据库自动更新
-uci set openclash.config.geosite_auto_update='1'
-uci set openclash.config.geosite_update_week_time='*'  # 每周更新
-uci set openclash.config.geosite_update_day_time='4'  # 每周的第 4 天（可以根据需求修改）
-# 启用大陆白名单订阅自动更新
-uci set openclash.config.chnr_auto_update='1'  # 开启大陆白名单订阅自动更新
-uci set openclash.config.chnr_update_week_time='*'  # 每周更新
-uci set openclash.config.chnr_update_day_time='5'  # 每周的第 5 天（可以根据需求修改）
-uci commit openclash
-
 ### 无线设置
 # 删除现有无线配置
 uci -q del wireless.default_radio2
