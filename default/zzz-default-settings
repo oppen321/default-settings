@@ -33,6 +33,35 @@ uci commit dhcp
 uci set firewall.@zone[1].input='ACCEPT'
 uci commit firewall
 
+# diagnostics
+uci set luci.diag.dns='www.qq.com'
+uci set luci.diag.ping='www.qq.com'
+uci set luci.diag.route='www.qq.com'
+uci commit luci
+
+# packet steering
+uci -q get network.globals.packet_steering > /dev/null || {
+    uci set network.globals='globals'
+    uci set network.globals.packet_steering=2
+    uci set network.globals.steering_flows='128'
+    uci commit network
+}
+
+# nginx
+uci set nginx.global.uci_enable='true'
+uci del nginx._lan
+uci del nginx._redirect2ssl
+uci add nginx server
+uci rename nginx.@server[0]='_lan'
+uci set nginx._lan.server_name='_lan'
+uci add_list nginx._lan.listen='80 default_server'
+uci add_list nginx._lan.listen='[::]:80 default_server'
+#uci add_list nginx._lan.include='restrict_locally'
+uci add_list nginx._lan.include='conf.d/*.locations'
+uci set nginx._lan.access_log='off; # logd openwrt'
+uci commit nginx
+service nginx restart
+
 # 设置主机名映射，解决安卓原生TV首次连不上网的问题
 uci add dhcp domain
 uci set "dhcp.@domain[-1].name=time.android.com"
