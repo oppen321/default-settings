@@ -26,6 +26,12 @@ else
     sed -i 's,downloads.openwrt.org,mirror.sjtu.edu.cn/openwrt,g' /etc/opkg/distfeeds.conf
 fi
 
+# release
+sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
+echo "DISTRIB_REVISION='R25.2.5'" >> /etc/openwrt_release
+sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='ZeroWrt '" >> /etc/openwrt_release
+
 # zram
 mem_total=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 zram_size=$(echo | awk "{print int($mem_total*0.25/1024)}")
