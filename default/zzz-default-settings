@@ -28,7 +28,7 @@ fi
 
 # release
 sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
-echo "DISTRIB_REVISION='R25.2.5'" >> /etc/openwrt_release
+echo "DISTRIB_REVISION='VIP'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
 echo "DISTRIB_DESCRIPTION='ZeroWrt '" >> /etc/openwrt_release
 
@@ -62,6 +62,8 @@ sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
 echo "DISTRIB_REVISION=' By OPPEN321'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
 echo "DISTRIB_DESCRIPTION='ZeroWrt-$(date +%Y%m%d)'" >> /etc/openwrt_release
+sed -i '/DISTRIB_RELEASE/d' /etc/openwrt_release
+echo "DISTRIB_RELEASE='v24.10.0'" >> /etc/openwrt_release
 
 # diagnostics
 uci set luci.diag.dns='www.qq.com'
