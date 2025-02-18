@@ -103,6 +103,10 @@ fi
 uci set AdGuardHome.configpath='/etc/config/AdGuardHome.yaml'
 uci commit AdGuardHome
 
+# 关闭lucky
+uci set lucky.@lucky[0].enabled='0'
+uci commit lucky
+
 # Smartdns相关设置
 uci add smartdns server
 uci set smartdns.@server[0].enabled='1'
